@@ -56,16 +56,16 @@ docker run --rm -p 8080:8080 media-converter
 
 ## Deploy to Google Cloud Run
 
-The GitHub Actions workflow deploys on pushes to `main`. Configure these GitHub
-Actions repository variables before enabling it:
+The GitHub Actions workflow deploys on pushes to `main`. Add the service
+account's JSON key as the GitHub Actions secret `GCP_SA_KEY`. Configure these
+repository variables:
 
-- `GCP_WORKLOAD_IDENTITY_PROVIDER`
-- `GCP_SERVICE_ACCOUNT`
 - `GCP_PROJECT_ID`
 - `GCP_REGION`
 
-The Google Cloud service account must be configured for Workload Identity
-Federation and have the permissions needed to build and deploy to Cloud Run.
+The service account must have the permissions needed to build and deploy to
+Cloud Run. A JSON key is a long-lived credential; restrict its permissions and
+rotate it if exposed. Workload Identity Federation is preferable when available.
 
 The current frontend is served by Flask, so one Cloud Run service hosts both
 frontend and backend.
