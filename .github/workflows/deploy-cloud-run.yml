@@ -38,3 +38,4 @@ jobs:
           region: ${{ vars.GCP_REGION }}
           project_id: ${{ vars.GCP_PROJECT_ID }}
           source: .
+          timeout: 1860s
