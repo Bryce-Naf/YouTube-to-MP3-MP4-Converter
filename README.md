@@ -67,7 +67,21 @@ Actions repository variables before enabling it:
 The Google Cloud service account must be configured for Workload Identity
 Federation and have the permissions needed to build and deploy to Cloud Run.
 
+Submit the backend build and deployment from the repository root with
+`gcloud builds submit --config cloudbuild-backend.yaml .`. The Cloud Build
+service account must be allowed to push images and deploy Cloud Run services.
+`cloudbuild-frontend.yaml` expects a Vite frontend Docker build context at
+`./frontend` and `VITE_API_URL` set to the deployed backend URL. That separate
+frontend build context is not present in this repository yet.
+
+The backend configuration enables unauthenticated public access. Add
+authentication, request limits, and a retention plan before using it with
+untrusted users.
+
 Uploaded files and SQLite storage in Cloud Run are ephemeral and local to an
 instance. A production deployment that needs persistent files or multiple
-instances should use managed storage and a managed database. Add a retention
-policy and request controls before exposing uploads publicly.
+instances should use managed storage and a managed database.
+
+## AI Usage
+
+Copilot assisted in the creation of this entire program. It helped in figuring out issues related to copyright and how the program could be made despite having these issues. 
