@@ -68,15 +68,7 @@ The Google Cloud service account must be configured for Workload Identity
 Federation and have the permissions needed to build and deploy to Cloud Run.
 
 The current frontend is served by Flask, so one Cloud Run service hosts both
-frontend and backend. Submit the build and deployment from the repository root
-with `gcloud builds submit --config cloudbuild.yaml .`, or configure a Cloud
-Build trigger to use `cloudbuild.yaml` as its build configuration. The Cloud
-Build service account must be allowed to push images and deploy Cloud Run
-services.
-
-The backend configuration enables unauthenticated public access. Add
-authentication, request limits, and a retention plan before using it with
-untrusted users.
+frontend and backend.
 
 Uploaded files and SQLite storage in Cloud Run are ephemeral and local to an
 instance. A production deployment that needs persistent files or multiple
