@@ -33,7 +33,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: youtube-media-converter
-          region: ${{ vars.GCP_REGION }}
-          project_id: ${{ vars.GCP_PROJECT_ID }}
+          region: ${{ secrets.GCP_REGION }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           source: .
           timeout: 1860s
