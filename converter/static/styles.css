@@ -36,33 +36,31 @@ body {
 }
 
 h1 {
-  max-width: 13ch;
   margin: 0;
+  margin-bottom: 28px;
   font-size: clamp(2rem, 6vw, 3.25rem);
   line-height: 1.08;
 }
 
-.intro {
-  margin: 18px 0 28px;
-  color: #526078;
-  font-size: 1.05rem;
-  line-height: 1.6;
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-.notice {
-  padding: 20px;
-  border: 1px solid #bfdbfe;
-  border-radius: 12px;
-  background: #eff6ff;
+input[type="url"] {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: inherit;
+  font: inherit;
 }
 
-.notice h2 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-}
-
-.notice p {
-  margin: 0;
-  color: #334155;
-  line-height: 1.55;
+input[type="url"]:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+  border-color: #2563eb;
 }
