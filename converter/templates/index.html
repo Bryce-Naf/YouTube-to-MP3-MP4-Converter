@@ -3,31 +3,43 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Enter a URL to get started.">
-    <title>Media URL</title>
+    <meta name="description" content="Preview a YouTube video using its URL.">
+    <title>YouTube Preview</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='app.js') }}" defer></script>
   </head>
   <body>
     <main class="panel">
-      <p class="eyebrow">Media tools</p>
-      <h1>Enter a URL</h1>
-      <form id="url-form">
-        <label for="media-url">YouTube URL</label>
-        <div class="url-entry">
-          <input
-            id="media-url"
-            name="url"
-            type="url"
-            inputmode="url"
-            autocomplete="url"
-            placeholder="https://www.youtube.com/watch?v=..."
-            required
-          >
-          <button type="submit">Submit URL</button>
-        </div>
-        <p id="submit-status" class="submit-status" role="status"></p>
-      </form>
+      <section class="url-entry-panel" aria-labelledby="page-title">
+        <p class="eyebrow">Media tools</p>
+        <h1 id="page-title">Enter a URL</h1>
+        <form id="url-form">
+          <label for="media-url">YouTube URL</label>
+          <div class="url-entry">
+            <input
+              id="media-url"
+              name="url"
+              type="url"
+              inputmode="url"
+              autocomplete="url"
+              placeholder="https://www.youtube.com/watch?v=..."
+              required
+            >
+            <button type="submit">Submit URL</button>
+          </div>
+          <p id="submit-status" class="submit-status" role="status"></p>
+        </form>
+      </section>
+      <section id="video-preview" class="video-preview" aria-label="Video preview" hidden>
+        <iframe
+          id="youtube-player"
+          title="YouTube video preview"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </section>
     </main>
   </body>
 </html>

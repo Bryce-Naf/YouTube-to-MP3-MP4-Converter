@@ -10,6 +10,8 @@ def test_home_page():
     assert b'id="media-url"' in response.data
     assert b'type="url"' in response.data
     assert b'<button type="submit">Submit URL</button>' in response.data
+    assert b'id="video-preview"' in response.data
+    assert b'youtube-player' in response.data
 
 
 def test_health_endpoint_checks_database():
