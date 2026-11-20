@@ -1,11 +1,8 @@
 # YouTube-to-MP3-MP4-Converter
 
-A starter web application for media conversion. The initial scaffold includes a
-Flask application, a basic HTML/CSS/JavaScript interface, a health-check REST
-endpoint, and SQLite configuration through Flask-SQLAlchemy.
-
-The conversion engine is intentionally not implemented yet. Future functionality
-should only process media the user owns or is authorized to use.
+A Flask web application for previewing YouTube videos with YouTube's embedded
+player and converting media files uploaded by the user. Uploaded media should
+only be files the user owns or is authorized to use.
 
 ## Technology stack
 
@@ -15,9 +12,24 @@ should only process media the user owns or is authorized to use.
 - Deployment: Docker, Google Cloud Run, and GitHub Actions
 - Development/AI assistance: GitHub Copilot
 
+## Upload and convert media
+
+The homepage accepts local audio and video uploads and offers MP3 or MP4 output.
+Supported inputs are MP4, MOV, MKV, WebM, AVI, MP3, WAV, M4A, AAC, FLAC, and OGG.
+FFprobe verifies the actual media container, streams, and duration; a file's
+extension alone is not considered sufficient validation. MP3 output requires an
+audio track. Audio-only files converted to MP4 receive a black video background.
+
+Uploads are limited to 500 MB and two hours of media. Converted output is limited
+to 1 GB. FFmpeg and FFprobe must be installed and available on `PATH` when running
+outside Docker. Uploaded sources, converted files, and job metadata are stored
+locally under `instance/media_jobs` and in the SQLite database, respectively.
+Files are currently retained until manually removed.
+
 ## Run locally
 
-Requires Python 3.12 or newer.
+Requires Python 3.12 or newer, plus FFmpeg/FFprobe on `PATH`. The Docker image
+installs FFmpeg automatically.
 
 ```powershell
 py -3.12 -m venv .venv
@@ -55,6 +67,7 @@ Actions repository variables before enabling it:
 The Google Cloud service account must be configured for Workload Identity
 Federation and have the permissions needed to build and deploy to Cloud Run.
 
-SQLite storage in Cloud Run is ephemeral and local to an instance. A production
-deployment that needs persistent data or multiple instances should use a
-managed database.
+Uploaded files and SQLite storage in Cloud Run are ephemeral and local to an
+instance. A production deployment that needs persistent files or multiple
+instances should use managed storage and a managed database. Add a retention
+policy and request controls before exposing uploads publicly.

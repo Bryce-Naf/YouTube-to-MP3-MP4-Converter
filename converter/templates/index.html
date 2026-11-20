@@ -3,42 +3,80 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Preview a YouTube video using its URL.">
-    <title>YouTube Preview</title>
+    <meta name="description" content="Preview YouTube videos or convert an uploaded media file.">
+    <title>Media Converter</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='app.js') }}" defer></script>
   </head>
   <body>
-    <main class="panel">
-      <section class="url-entry-panel" aria-labelledby="page-title">
-        <p class="eyebrow">Media tools</p>
-        <h1 id="page-title">Enter a URL</h1>
-        <form id="url-form">
-          <label for="media-url">YouTube URL</label>
-          <div class="url-entry">
-            <input
-              id="media-url"
-              name="url"
-              type="url"
-              inputmode="url"
-              autocomplete="url"
-              placeholder="https://www.youtube.com/watch?v=..."
-              required
-            >
-            <button type="submit">Submit URL</button>
-          </div>
-          <p id="submit-status" class="submit-status" role="status"></p>
-        </form>
+    <main class="page">
+      <section id="youtube-panel" class="panel youtube-panel">
+        <section class="url-entry-panel" aria-labelledby="page-title">
+          <p class="eyebrow">Media tools</p>
+          <h1 id="page-title">Preview a YouTube video</h1>
+          <form id="url-form">
+            <label for="media-url">YouTube URL</label>
+            <div class="url-entry">
+              <input
+                id="media-url"
+                name="url"
+                type="url"
+                inputmode="url"
+                autocomplete="url"
+                placeholder="https://www.youtube.com/watch?v=..."
+                required
+              >
+              <button type="submit">Submit URL</button>
+            </div>
+            <p id="submit-status" class="submit-status" role="status"></p>
+          </form>
+        </section>
+        <section id="video-preview" class="video-preview" aria-label="Video preview" hidden>
+          <iframe
+            id="youtube-player"
+            title="YouTube video preview"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </section>
       </section>
-      <section id="video-preview" class="video-preview" aria-label="Video preview" hidden>
-        <iframe
-          id="youtube-player"
-          title="YouTube video preview"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+
+      <section class="panel upload-panel" aria-labelledby="upload-title">
+        <p class="eyebrow">Local media</p>
+        <h2 id="upload-title">Upload and convert a file</h2>
+        <p class="upload-help">
+          Upload audio or video you own or are authorized to use. Maximum file size: 500 MB.
+          Audio converted to MP4 gets a black background.
+        </p>
+        <form id="upload-form" action="{{ url_for('api.convert_upload') }}" method="post" enctype="multipart/form-data">
+          <div class="upload-fields">
+            <div>
+              <label for="media-file">Media file</label>
+              <input
+                id="media-file"
+                name="file"
+                type="file"
+                accept=".mp4,.mov,.mkv,.webm,.avi,.mp3,.wav,.m4a,.aac,.flac,.ogg"
+                required
+              >
+            </div>
+            <div>
+              <label for="output-format">Convert to</label>
+              <select id="output-format" name="output_format">
+                <option value="mp3">MP3 audio</option>
+                <option value="mp4">MP4 video</option>
+              </select>
+            </div>
+          </div>
+          <p class="format-help">
+            Supported inputs: MP4, MOV, MKV, WebM, AVI, MP3, WAV, M4A, AAC, FLAC, and OGG.
+          </p>
+          <button id="convert-button" type="submit">Upload and convert</button>
+          <p id="upload-status" class="submit-status" role="status"></p>
+          <a id="download-link" class="download-link" hidden>Download converted file</a>
+        </form>
       </section>
     </main>
   </body>

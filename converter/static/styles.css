@@ -17,8 +17,14 @@ body {
   padding: 24px;
 }
 
+.page {
+  display: grid;
+  width: min(100%, 1080px);
+  gap: 24px;
+}
+
 .panel {
-  width: min(100%, 620px);
+  width: 100%;
   padding: clamp(28px, 6vw, 56px);
   background: #fff;
   border: 1px solid #dbe3ee;
@@ -26,8 +32,13 @@ body {
   box-shadow: 0 20px 60px rgb(23 32 51 / 8%);
 }
 
-.panel.has-preview {
-  width: min(100%, 1000px);
+.youtube-panel {
+  max-width: 620px;
+  justify-self: center;
+}
+
+.youtube-panel.has-preview {
+  max-width: 1000px;
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   align-items: center;
@@ -52,6 +63,12 @@ h1 {
   margin-bottom: 28px;
   font-size: clamp(2rem, 6vw, 3.25rem);
   line-height: 1.08;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.2;
 }
 
 label {
@@ -100,10 +117,67 @@ button:hover {
   background: #1d4ed8;
 }
 
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 .submit-status {
   min-height: 1.5em;
   margin: 12px 0 0;
   color: #526078;
+}
+
+.upload-help,
+.format-help {
+  color: #526078;
+  line-height: 1.55;
+}
+
+.upload-help {
+  margin: 0 0 20px;
+}
+
+.format-help {
+  margin: 12px 0 20px;
+  font-size: 0.9rem;
+}
+
+.upload-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(160px, 0.75fr);
+  gap: 16px;
+  align-items: end;
+}
+
+input[type="file"],
+select {
+  width: 100%;
+  min-height: 52px;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+input[type="file"]:focus-visible,
+select:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+  border-color: #2563eb;
+}
+
+.download-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .video-preview {
@@ -127,8 +201,12 @@ button:hover {
 }
 
 @media (max-width: 760px) {
-  .panel.has-preview {
+  .youtube-panel.has-preview {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .upload-fields {
+    grid-template-columns: 1fr;
   }
 }
