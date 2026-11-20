@@ -49,9 +49,15 @@ label {
   font-weight: 600;
 }
 
+.url-entry {
+  display: flex;
+  gap: 10px;
+}
+
 input[type="url"] {
-  width: 100%;
+  min-width: 0;
   min-height: 52px;
+  flex: 1;
   padding: 12px 14px;
   border: 1px solid #cbd5e1;
   border-radius: 10px;
@@ -59,8 +65,37 @@ input[type="url"] {
   font: inherit;
 }
 
-input[type="url"]:focus-visible {
+input[type="url"]:focus-visible,
+button:focus-visible {
   outline: 3px solid #93c5fd;
   outline-offset: 2px;
   border-color: #2563eb;
+}
+
+button {
+  min-height: 52px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.submit-status {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  color: #526078;
+}
+
+@media (max-width: 480px) {
+  .url-entry {
+    flex-direction: column;
+  }
 }

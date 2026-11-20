@@ -12,15 +12,22 @@
     <main class="panel">
       <p class="eyebrow">Media tools</p>
       <h1>Enter a URL</h1>
-      <label for="media-url">YouTube URL</label>
-      <input
-        id="media-url"
-        name="url"
-        type="url"
-        inputmode="url"
-        autocomplete="url"
-        placeholder="https://www.youtube.com/watch?v=..."
-      >
+      <form id="url-form">
+        <label for="media-url">YouTube URL</label>
+        <div class="url-entry">
+          <input
+            id="media-url"
+            name="url"
+            type="url"
+            inputmode="url"
+            autocomplete="url"
+            placeholder="https://www.youtube.com/watch?v=..."
+            required
+          >
+          <button type="submit">Submit URL</button>
+        </div>
+        <p id="submit-status" class="submit-status" role="status"></p>
+      </form>
     </main>
   </body>
 </html>
