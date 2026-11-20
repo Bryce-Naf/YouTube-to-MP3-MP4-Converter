@@ -3,25 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A starter interface for authorized media conversion.">
-    <title>Media Converter</title>
+    <meta name="description" content="Enter a URL to get started.">
+    <title>Media URL</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='app.js') }}" defer></script>
   </head>
   <body>
     <main class="panel">
       <p class="eyebrow">Media tools</p>
-      <h1>Convert media you’re authorized to use</h1>
-      <p class="intro">
-        This project is being set up. The conversion service is not implemented yet.
-      </p>
-      <section class="notice" aria-live="polite">
-        <h2>Getting started</h2>
-        <p>
-          The web interface and API foundation are ready. Conversion support will
-          be added for media you own or have permission to process.
-        </p>
-      </section>
+      <h1>Enter a URL</h1>
+      <form id="url-form">
+        <label for="media-url">YouTube URL</label>
+        <div class="url-entry">
+          <input
+            id="media-url"
+            name="url"
+            type="url"
+            inputmode="url"
+            autocomplete="url"
+            placeholder="https://www.youtube.com/watch?v=..."
+            required
+          >
+          <button type="submit">Submit URL</button>
+        </div>
+        <p id="submit-status" class="submit-status" role="status"></p>
+      </form>
     </main>
   </body>
 </html>
